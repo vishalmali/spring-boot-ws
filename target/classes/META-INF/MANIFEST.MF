@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: Spring Boot Web Services
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: vimali
+Implementation-Vendor-Id: com.aviva.springbootws
+Build-Jdk: 1.8.0_144
+Implementation-URL: http://projects.spring.io/spring-boot/spring-boot-
+ ws/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
