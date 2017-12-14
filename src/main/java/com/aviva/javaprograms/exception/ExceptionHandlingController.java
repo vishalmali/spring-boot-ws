@@ -6,6 +6,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * @author Vishal Mali
+ *         <p>
+ *         Exception handler class which handles all the exceptions.
+ *         <p>
+ *         Below are the exceptions handled by this class: <ui>
+ *         <li>{@link ResourceNotFoundException} - Thrown when resource is not
+ *         found</li>
+ *         <li>{@link InvalidInputException} - Thrown when input provided is
+ *         invalid</li>
+ *         <li>{@link Exception} - Thrown when any other exception occurred</li>
+ *         </ui>
+ */
 @ControllerAdvice
 public class ExceptionHandlingController {
 	@ExceptionHandler(ResourceNotFoundException.class)

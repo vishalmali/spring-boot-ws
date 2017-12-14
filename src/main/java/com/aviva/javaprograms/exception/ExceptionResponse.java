@@ -1,9 +1,16 @@
 package com.aviva.javaprograms.exception;
 
+/**
+ * @author Vishal Mali
+ *         <p>
+ *         Exception response containing fields to hold relevant information
+ *         about errors that happen during REST calls
+ */
 public class ExceptionResponse {
 	private String erroCode;
 	private String errorMessage;
-	private String documentationLink;//If you want to share Exception class documentation.
+	// To share a particular Exception class documentation.
+	private String documentationLink;
 
 	public String getErroCode() {
 		return erroCode;
@@ -28,5 +35,4 @@ public class ExceptionResponse {
 	public void setDocumentationLink(String documentationLink) {
 		this.documentationLink = documentationLink;
 	}
-
 }
