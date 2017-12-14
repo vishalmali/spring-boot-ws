@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.aviva.javaprograms.service.JavaProgramsService;
 
@@ -25,27 +26,26 @@ public class JavaProgramsControllerTest {
 	MockMvc mockMvc;
 	@MockBean
 	JavaProgramsService javaProgramsService;
-	
-	Object[] array = new Object[] {1, 1, 2, 3, 5, 8};
-	
+
+	Object[] array = new Object[] { 1, 1, 2, 3, 5, 8 };
 	String expected = "[1, 1, 2, 3, 5, 8]";
-	
-	
 
 	@Test
-	public void getFibonacciSeries() throws Exception {
-		
-		Mockito.when(javaProgramsService.getFibonacciSeries("6")).thenReturn(Arrays.asList(array));
-		
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-				"/fibo/6").accept(
-				MediaType.APPLICATION_JSON);
-		
-		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		
-		
-		JSONAssert.assertEquals(expected, result.getResponse()
-				.getContentAsString(), false);
-		
+	public void testGetFibonacciSeries() throws Exception {
+		Mockito
+		.when(javaProgramsService.getFibonacciSeries("6"))
+		.thenReturn(Arrays.asList(array));
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders
+				.get("/fibo/6")
+				.accept(MediaType.APPLICATION_JSON);
+
+		MvcResult result = mockMvc
+				.perform(requestBuilder)
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andReturn();
+
+		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
+
 	}
 }
