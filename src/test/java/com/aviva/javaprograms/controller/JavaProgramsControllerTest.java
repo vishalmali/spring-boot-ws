@@ -1,7 +1,11 @@
 package com.aviva.javaprograms.controller;
 
+import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -27,8 +31,25 @@ public class JavaProgramsControllerTest {
 	@MockBean
 	JavaProgramsService javaProgramsService;
 
-	Object[] array = new Object[] { 1, 1, 2, 3, 5, 8 };
-	String expected = "[1, 1, 2, 3, 5, 8]";
+	Object[] array;
+	String expectedListStr;
+	String expectedMapStr;
+	Map<Integer, BigInteger> expectedMap;
+	@Before
+	public void setUp() {
+		array = new Object[] { 1, 1, 2, 3, 5, 8 };
+		expectedListStr = "[1, 1, 2, 3, 5, 8]";
+		
+		expectedMap = new HashMap<>();
+		expectedMap.put(1, BigInteger.valueOf(1));
+		expectedMap.put(2, BigInteger.valueOf(1));
+		expectedMap.put(3, BigInteger.valueOf(2));
+		expectedMap.put(4, BigInteger.valueOf(3));
+		expectedMap.put(5, BigInteger.valueOf(5));
+		expectedMap.put(6, BigInteger.valueOf(8));
+		expectedMapStr = "{\"1\":1,\"2\":1,\"3\":2,\"4\":3,\"5\":5,\"6\":8}";
+	}
+
 
 	@Test
 	public void testGetFibonacciSeries() throws Exception {
@@ -45,7 +66,29 @@ public class JavaProgramsControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andReturn();
 
-		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
+		JSONAssert.assertEquals(expectedListStr, result.getResponse().getContentAsString(), false);
 
 	}
+	
+	
+	@Test
+	public void testGetFibonacciSeriesWithIndexes() throws Exception {
+		Mockito
+		.when(javaProgramsService.getFibonacciSeriesWithIndexes("6"))
+		.thenReturn(expectedMap);
+				
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders
+				.get("/fibowithindexes/6")
+				.accept(MediaType.APPLICATION_JSON);
+
+		MvcResult result = mockMvc
+				.perform(requestBuilder)
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andReturn();
+
+		JSONAssert.assertEquals(expectedMapStr, result.getResponse().getContentAsString(), false);
+
+	}
+	
 }

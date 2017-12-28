@@ -4,7 +4,7 @@ package com.aviva.javaprograms.exception;
  * @author Vishal Mali
  *         <p>
  *         Exception response containing fields to hold relevant information
- *         about errors that happen during REST calls
+ *         about the errors
  */
 public class ExceptionResponse {
 	private String erroCode;

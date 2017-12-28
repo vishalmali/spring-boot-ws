@@ -1,29 +1,42 @@
 package com.aviva.javaprograms.service;
 
+import java.math.BigInteger;
 import java.util.List;
-
-import com.aviva.javaprograms.exception.InvalidInputException;
+import java.util.Map;
 
 /**
- * 
  * @author Vishal Mali
  *         <p>
- *         This is a service layer which provides various services related to
- *         java programs. Services are listed below:
+ *         This is a service interface layer which provides various services
+ *         related to java programs. Services are listed below:
  *         <ul>
  *         <li>Fibonacci Series</li>
+ *         <li>Fibonacci Series with index positions</li>
  *         </ul>
+ * 
+ *         {@link BigInteger} is used across the methods, so that we can
+ *         calculate the Fibonacci of the big numbers as well.
  */
 public interface JavaProgramsService {
 	/**
-	 * Gets Fibonacci Series upto the given number
+	 * Gets Fibonacci Series up to the given number
 	 * 
 	 * @param input
-	 *            A number in String format upto which Fibonacci Series is to be
+	 *            A number in String format up to which Fibonacci Series is to be
 	 *            generated
-	 * @return List containing Fibonacci series
-	 * @throws InvalidInputException
-	 *             If input provided is invalid
+	 * @return List of Fibonacci series
 	 */
-	List<Object> getFibonacciSeries(String input) throws InvalidInputException;
+	List<Object> getFibonacciSeries(String input);
+
+	/**
+	 * Gets Fibonacci Series up to the given number with their indexes
+	 * <p>
+	 * Here Fibonacci series is stored as map values and their indexes as keys.
+	 * 
+	 * @param input
+	 *            A number in String format up to which Fibonacci Series is to be
+	 *            generated
+	 * @return Map of Fibonacci Series
+	 */
+	Map<Integer, BigInteger> getFibonacciSeriesWithIndexes(String input);
 }

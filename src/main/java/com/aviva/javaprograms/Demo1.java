@@ -8,9 +8,11 @@ import java.util.Map;
 public class Demo1 {
 	private static Map<Integer, BigInteger> memo = new HashMap<>();
 
+	String s = "{\"1\":1,\"2\":1,\"3\":2,\"4\":3,\"5\":5,\"6\":8}";
+	
 	public static void main(String[] args) {
 
-		for (int i = 1; i < 11; i++) {
+		for (int i = 1; i < 31; i++) {
 			memo.put(i, fibonacci3(i));
 			 //System.out.println(fibonacci3(i));
 		}
