@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.aviva.javaprograms.dto.Response;
 import com.aviva.javaprograms.exception.InvalidInputException;
 import com.aviva.javaprograms.util.JavaProgramsUtils;
 
@@ -31,7 +32,7 @@ public class JavaProgramsServiceImpl implements JavaProgramsService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Object> getFibonacciSeries(String input) {
+	public List<BigInteger> getFibonacciSeries(String input) {
 		validateInput(input);
 		return new ArrayList<>(JavaProgramsUtils.generateFibonacciSeries(Integer.parseInt(input)).values());
 		// TODO: Uncomment the below statement and comment the above statement to generate Fibonacci Series recursively.
@@ -49,6 +50,19 @@ public class JavaProgramsServiceImpl implements JavaProgramsService {
 		// return JavaProgramsUtils.generateFibonacciSeriesRecursively(Integer.parseInt(input));
 	}
 
+	@Override
+	public Response getFibonacciSeriesWithPagination(String input, String pageNo, String recordsPerPage) {
+		
+		Response response = new Response();
+		response.setInput(input);
+		response.setPageNo(pageNo);
+		response.setRecordsPerPage(recordsPerPage);
+		response.setFibonacciSeries(new ArrayList<>(JavaProgramsUtils.generateFibonacciSeries(Integer.parseInt(input)).values()));
+		response.setFibonacciSeriesWithIndexes(JavaProgramsUtils.generateFibonacciSeries(Integer.parseInt(input)));
+		
+		return response;
+	}
+	
 	/**
 	 * Validates input string
 	 * 

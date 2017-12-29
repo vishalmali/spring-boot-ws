@@ -3,7 +3,7 @@ package com.aviva.javaprograms.service;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigInteger;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,15 +24,22 @@ public class JavaProgramsServiceImplTest {
 
 	@Test
 	public void testGetFibonacciSeries() throws InvalidInputException {
-		Object[] array = new Object[] { BigInteger.valueOf(1), BigInteger.valueOf(1), BigInteger.valueOf(2),
-				BigInteger.valueOf(3), BigInteger.valueOf(5), BigInteger.valueOf(8) };
-		List<Object> actualList = javaProgramsServiceImpl.getFibonacciSeries("6");
-		assertThat(actualList, CoreMatchers.is(Arrays.asList(array)));
+		List<BigInteger> fibonacciList = new ArrayList<>();
+		fibonacciList.add(BigInteger.valueOf(1));	
+		fibonacciList.add(BigInteger.valueOf(1));
+		fibonacciList.add(BigInteger.valueOf(2));
+		fibonacciList.add(BigInteger.valueOf(3));
+		fibonacciList.add(BigInteger.valueOf(5));
+		fibonacciList.add(BigInteger.valueOf(8));
+		
+		List<BigInteger> actualList = javaProgramsServiceImpl.getFibonacciSeries("6");
+		
+		assertThat(actualList, CoreMatchers.is(fibonacciList));
 	}
 
 	@Test
 	public void testGetFibonacciSeriesFromMap() {
-		Map<Integer, Object> fibonacciMap = new HashMap<>();
+		Map<Integer, BigInteger> fibonacciMap = new HashMap<>();
 		fibonacciMap.put(1, BigInteger.valueOf(1));
 		fibonacciMap.put(2, BigInteger.valueOf(1));
 		fibonacciMap.put(3, BigInteger.valueOf(2));

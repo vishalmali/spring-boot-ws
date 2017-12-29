@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
+import com.aviva.javaprograms.dto.Response;
+
 /**
  * @author Vishal Mali
  *         <p>
@@ -26,7 +28,7 @@ public interface JavaProgramsService {
 	 *            generated
 	 * @return List of Fibonacci series
 	 */
-	List<Object> getFibonacciSeries(String input);
+	List<BigInteger> getFibonacciSeries(String input);
 
 	/**
 	 * Gets Fibonacci Series up to the given number with their indexes
@@ -39,4 +41,6 @@ public interface JavaProgramsService {
 	 * @return Map of Fibonacci Series
 	 */
 	Map<Integer, BigInteger> getFibonacciSeriesWithIndexes(String input);
+
+	Response getFibonacciSeriesWithPagination(String input, String pageNo, String recordsPerPage);
 }
