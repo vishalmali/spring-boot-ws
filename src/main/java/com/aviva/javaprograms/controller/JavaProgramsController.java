@@ -37,7 +37,7 @@ public class JavaProgramsController {
 	 *            generated
 	 * @return Fibonacci Series in list format composed in {@link ResponseEntity}
 	 */
-	@GetMapping("/fibo/{input}")
+	@GetMapping("/v1/fibo/{input}")
 	public ResponseEntity<List<Object>> getFibonacciSeries(@PathVariable String input) {
 		return new ResponseEntity<List<Object>>(javaProgramsService.getFibonacciSeries(input), HttpStatus.OK);
 	}
@@ -52,7 +52,7 @@ public class JavaProgramsController {
 	 *            generated
 	 * @return Fibonacci Series in map format composed in {@link ResponseEntity}
 	 */
-	@GetMapping("/fibowithindexes/{input}")
+	@GetMapping("/v2/fibo/{input}")
 	public ResponseEntity<Map<Integer, BigInteger> > getFibonacciSeriesWithIndexes(@PathVariable String input) {
 		return new ResponseEntity<Map<Integer, BigInteger> >(javaProgramsService.getFibonacciSeriesWithIndexes(input), HttpStatus.OK);
 	}

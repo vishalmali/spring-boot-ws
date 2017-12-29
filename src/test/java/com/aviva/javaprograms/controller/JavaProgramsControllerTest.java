@@ -59,7 +59,7 @@ public class JavaProgramsControllerTest {
 		.thenReturn(Arrays.asList(array));
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.get("/fibo/6")
+				.get("/v1/fibo/6")
 				.accept(MediaType.APPLICATION_JSON);
 
 		MvcResult result = mockMvc
@@ -80,7 +80,7 @@ public class JavaProgramsControllerTest {
 				
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.get("/fibowithindexes/6")
+				.get("/v2/fibo/6")
 				.accept(MediaType.APPLICATION_JSON);
 
 		MvcResult result = mockMvc
