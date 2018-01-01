@@ -38,7 +38,7 @@ public class JavaProgramsController {
 	 * @param input
 	 *            A number in String format up to which Fibonacci Series is to be
 	 *            generated
-	 * @return Fibonacci Series in list format composed in {@link ResponseEntity}
+	 * @return {@link ResponseEntity} composed of Fibonacci Series in list format
 	 */
 	@GetMapping("/v1/fibo/{input}")
 	public ResponseEntity<List<BigInteger>> getFibonacciSeries(@PathVariable String input) {
@@ -53,7 +53,7 @@ public class JavaProgramsController {
 	 * @param input
 	 *            A number in String format up to which Fibonacci Series is to be
 	 *            generated
-	 * @return Fibonacci Series in map format composed in {@link ResponseEntity}
+	 * @return {@link ResponseEntity} composed of Fibonacci Series in map format
 	 */
 	@GetMapping("/v2/fibo/{input}")
 	public ResponseEntity<Map<Integer, BigInteger>> getFibonacciSeriesWithIndexes(@PathVariable String input) {
@@ -61,7 +61,16 @@ public class JavaProgramsController {
 				HttpStatus.OK);
 	}
 
-
+	/**
+	 * Gets Fibonacci Series according to the pagination parameters
+	 * 
+	 * @param input
+	 *            A number in String format up to which Fibonacci Series is to be
+	 *            generated
+	 * @param pageNo Requested page number
+	 * @param recordsPerPage Number of records per page
+	 * @return {@link ResponseEntity} composed of Paginated Fibonnaci series encapsulated in Response class object 
+	 */
 	@GetMapping("/v3/fibo/{input}")
 	public ResponseEntity<Response> getFibonacciSeriesWithPagination(@PathVariable String input, @RequestParam String pageNo, @RequestParam String recordsPerPage) {
 		return new ResponseEntity<Response>(javaProgramsService.getFibonacciSeriesWithPagination(input, pageNo, recordsPerPage),
