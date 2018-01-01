@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Demo {
 
@@ -12,9 +15,38 @@ public class Demo {
 	private Map<Integer, BigInteger> fibonacciMap;
 	
 	public static void main(String[] args) {
-		List<Object> fibonacciSeries = new Demo().generateFibonacciSeries(Integer.parseInt("30"));
+/*		List<Object> fibonacciSeries = new Demo().generateFibonacciSeries(Integer.parseInt("30"));
 		//List<Object> fibonacciSeries = new Demo().getFibonacciSeriesFromMap(Integer.parseInt("30"));
-		System.out.println(fibonacciSeries);
+		System.out.println(fibonacciSeries);*/
+		
+		TreeMap<Integer, BigInteger> map = new TreeMap<>();
+		map.put(1, BigInteger.valueOf(1));
+		map.put(2, BigInteger.valueOf(1));
+		map.put(3, BigInteger.valueOf(2));
+		map.put(4, BigInteger.valueOf(3));
+		map.put(5, BigInteger.valueOf(5));
+		
+		Map<Integer, BigInteger> map1 = new HashMap<>();
+		map1.put(1, BigInteger.valueOf(1));
+		map1.put(2, BigInteger.valueOf(1));
+		map1.put(3, BigInteger.valueOf(2));
+		map1.put(4, BigInteger.valueOf(3));
+		map1.put(5, BigInteger.valueOf(5));
+		
+		System.out.println(map);
+		System.out.println(map1);
+		
+		 Set<Entry<Integer, BigInteger>>  entySet = map.entrySet();
+		 
+		 for (Entry entry : entySet) {
+			 System.out.println("Key = " + entry.getKey() + " Valye = " + entry.getValue());
+		}
+		 
+		 Set<Entry<Integer, BigInteger>>  entySet1 = map1.entrySet();
+		 
+		 for (Entry entry : entySet1) {
+			 System.out.println("Key = " + entry.getKey() + " Valye = " + entry.getValue());
+		}
 	
 	}
 

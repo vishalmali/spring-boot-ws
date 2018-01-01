@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -50,16 +51,46 @@ public class JavaProgramsServiceImpl implements JavaProgramsService {
 		// return JavaProgramsUtils.generateFibonacciSeriesRecursively(Integer.parseInt(input));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Response getFibonacciSeriesWithPagination(String input, String pageNo, String recordsPerPage) {
-		
+		validateInputs(input, pageNo, recordsPerPage);
+
+		int inputInt = Integer.valueOf(input);
+		int pageNoInt = Integer.valueOf(pageNo);
+		int recordsPerPageInt = Integer.valueOf(recordsPerPage);
+
 		Response response = new Response();
 		response.setInput(input);
 		response.setPageNo(pageNo);
 		response.setRecordsPerPage(recordsPerPage);
-		response.setFibonacciSeries(new ArrayList<>(JavaProgramsUtils.generateFibonacciSeries(Integer.parseInt(input)).values()));
-		response.setFibonacciSeriesWithIndexes(JavaProgramsUtils.generateFibonacciSeries(Integer.parseInt(input)));
-		
+
+		int mod = inputInt % recordsPerPageInt;
+		int rawSize = inputInt / recordsPerPageInt;
+
+		int noOfPagesAvailable = mod == 0 ? rawSize : rawSize + 1;
+
+		if (noOfPagesAvailable >= pageNoInt) {
+			int toIndex = (pageNoInt * recordsPerPageInt);
+
+			if (toIndex >= inputInt) {
+				toIndex = inputInt;
+			}
+
+			int fromIndex = ((pageNoInt - 1) * recordsPerPageInt) - 1 < 0 ? 0 : ((pageNoInt - 1) * recordsPerPageInt);
+
+			List<BigInteger> fibonacciSeries = new ArrayList<>(
+					JavaProgramsUtils.generateFibonacciSeries(inputInt).values());
+			response.setFibonacciSeries(fibonacciSeries.subList(fromIndex, toIndex));
+
+			Map<Integer, BigInteger> fibonacciSeriesWithIndexes = JavaProgramsUtils.generateFibonacciSeries(inputInt);
+			response.setFibonacciSeriesWithIndexes(
+					new TreeMap<>(fibonacciSeriesWithIndexes).subMap(fromIndex + 1, toIndex + 1));
+		} else {
+			throw new InvalidInputException("'" + pageNo + "'" + " passed is not a valid number");
+		}
 		return response;
 	}
 	
@@ -74,7 +105,13 @@ public class JavaProgramsServiceImpl implements JavaProgramsService {
 	 */
 	private void validateInput(String input) {
 		if (!StringUtils.isNumeric(input) || Integer.parseInt(input) == 0) {
-			throw new InvalidInputException("'" + input + "'" + " passed is not a valid number or position");
+			throw new InvalidInputException("'" + input + "'" + " passed is not a valid number");
 		}
+	}
+	
+	private void validateInputs(String input, String pageNo, String recordsPerPage) {
+		validateInput(input);
+		validateInput(pageNo);
+		validateInput(recordsPerPage);
 	}
 }

@@ -61,16 +61,7 @@ public class JavaProgramsController {
 				HttpStatus.OK);
 	}
 
-	/**
-	 * Gets Fibonacci Series up to the given number with their indexes
-	 * <p>
-	 * Here Fibonacci series is stored as map values and their indexes as keys.
-	 * 
-	 * @param input
-	 *            A number in String format up to which Fibonacci Series is to be
-	 *            generated
-	 * @return Fibonacci Series in map format composed in {@link ResponseEntity}
-	 */
+
 	@GetMapping("/v3/fibo/{input}")
 	public ResponseEntity<Response> getFibonacciSeriesWithPagination(@PathVariable String input, @RequestParam String pageNo, @RequestParam String recordsPerPage) {
 		return new ResponseEntity<Response>(javaProgramsService.getFibonacciSeriesWithPagination(input, pageNo, recordsPerPage),

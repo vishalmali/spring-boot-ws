@@ -42,5 +42,15 @@ public interface JavaProgramsService {
 	 */
 	Map<Integer, BigInteger> getFibonacciSeriesWithIndexes(String input);
 
+	/**
+	 * Gets Fibonacci Series according to the pagination parameters
+	 * 
+	 * @param input
+	 *            A number in String format up to which Fibonacci Series is to be
+	 *            generated
+	 * @param pageNo Requested page number
+	 * @param recordsPerPage Number of records per page
+	 * @return Paginated Fibonnaci series encapsulated in Response class object
+	 */
 	Response getFibonacciSeriesWithPagination(String input, String pageNo, String recordsPerPage);
 }

@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.aviva.javaprograms.dto.Response;
 import com.aviva.javaprograms.service.JavaProgramsService;
 
 @RunWith(SpringRunner.class)
@@ -73,4 +74,53 @@ public class JavaProgramsControllerTest {
 		JSONAssert.assertEquals(expectedMapStr, result.getResponse().getContentAsString(), false);
 	}
 
+	@Test
+	public void testGetFibonacciSeriesWithPagination() throws Exception {
+		Map<Integer, BigInteger> expectedMap = new HashMap<>();
+		expectedMap.put(5, BigInteger.valueOf(5));
+		expectedMap.put(6, BigInteger.valueOf(8));
+		expectedMap.put(7, BigInteger.valueOf(13)); 
+		expectedMap.put(8, BigInteger.valueOf(21));
+		
+		List<BigInteger> fibonacciList = new ArrayList<>();
+		fibonacciList.add(BigInteger.valueOf(5));
+		fibonacciList.add(BigInteger.valueOf(8));
+		fibonacciList.add(BigInteger.valueOf(13));
+		fibonacciList.add(BigInteger.valueOf(21));
+		
+		Response expectedResponse = new Response();
+		expectedResponse.setInput("9");
+		expectedResponse.setPageNo("2");
+		expectedResponse.setRecordsPerPage("4");
+		expectedResponse.setFibonacciSeriesWithIndexes(expectedMap);
+		expectedResponse.setFibonacciSeries(fibonacciList);
+		
+		String expectedString = "{\r\n" + 
+				"    \"input\": \"9\",\r\n" + 
+				"    \"pageNo\": \"2\",\r\n" + 
+				"    \"recordsPerPage\": \"4\",\r\n" + 
+				"    \"fibonacciSeries\": [\r\n" + 
+				"        5,\r\n" + 
+				"        8,\r\n" + 
+				"        13,\r\n" + 
+				"        21\r\n" + 
+				"    ],\r\n" + 
+				"    \"fibonacciSeriesWithIndexes\": {\r\n" + 
+				"        \"5\": 5,\r\n" + 
+				"        \"6\": 8,\r\n" + 
+				"        \"7\": 13,\r\n" + 
+				"        \"8\": 21\r\n" + 
+				"    }\r\n" + 
+				"}";
+		
+		Mockito.when(javaProgramsService.getFibonacciSeriesWithPagination("9", "2", "4")).thenReturn(expectedResponse);
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/v3/fibo/9?pageNo=2&recordsPerPage=4").accept(MediaType.APPLICATION_JSON);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+
+		JSONAssert.assertEquals(expectedString, result.getResponse().getContentAsString(), false);
+		
+	}
+	
 }

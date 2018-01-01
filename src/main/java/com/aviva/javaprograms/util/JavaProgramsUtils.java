@@ -1,8 +1,8 @@
 package com.aviva.javaprograms.util;
 
 import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Vishal Mali
@@ -29,7 +29,7 @@ public class JavaProgramsUtils {
 	 * @return Map of Fibonacci Series
 	 */
 	public static Map<Integer, BigInteger> generateFibonacciSeries(int number) {
-		Map<Integer, BigInteger> fibonacciMap = new HashMap<>();
+		Map<Integer, BigInteger> fibonacciMap = new TreeMap<>();
 		fibonacciMap.put(1, BigInteger.valueOf(1));
 		if (number > 1) {
 			fibonacciMap.put(2, BigInteger.valueOf(1));
@@ -50,7 +50,7 @@ public class JavaProgramsUtils {
 	 * @return Map of Fibonacci Series
 	 */
 	public static Map<Integer, BigInteger> generateFibonacciSeriesRecursively(int number) {
-		Map<Integer, BigInteger> fibonacciMap = new HashMap<>();
+		Map<Integer, BigInteger> fibonacciMap = new TreeMap<>();
 		for (int i = 1; i < number + 1; i++) {
 			fibonacciMap.put(i, generateFibonacciNumberRecursively(i));
 		}

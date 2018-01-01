@@ -1,45 +1,29 @@
 package com.aviva.javaprograms;
 
-
 import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.TreeMap;
+
+import com.aviva.javaprograms.util.JavaProgramsUtils;
 
 public class Demo1 {
-	private static Map<Integer, BigInteger> memo = new HashMap<>();
 
-	String s = "{\"1\":1,\"2\":1,\"3\":2,\"4\":3,\"5\":5,\"6\":8}";
-	
 	public static void main(String[] args) {
+		TreeMap<Integer, BigInteger> treeMap = new TreeMap<>(JavaProgramsUtils.generateFibonacciSeries(20));
+		System.out.println(treeMap);
+		System.out.println(treeMap.size());
+		System.out.println(treeMap.subMap(1, 5));
+		
+		Collection<BigInteger> collection =  JavaProgramsUtils.generateFibonacciSeries(20).values();
+		ArrayList list = new ArrayList<>(collection);
+		System.out.println(list);
+		System.out.println(list.size());
+		System.out.println(list.subList(0, 5 - 1));
+	
 
-		for (int i = 1; i < 31; i++) {
-			memo.put(i, fibonacci3(i));
-			 //System.out.println(fibonacci3(i));
-		}
-
-		System.out.println(memo);
-		//System.out.println(memo.values());
 	}
-
-	public static BigInteger fibonacci3(int n) {
-		if (n == 0 ) {
-			return BigInteger.ZERO;
-		}
-		if ( n == 1) {
-			return BigInteger.ONE;
-		}
-		/*if (memo.containsKey(n)) {
-			return memo.get(n);
-		}*/
-		BigInteger v = fibonacci3(n - 2).add(fibonacci3(n - 1));
-		return v;
-	}
-
-	/*public static BigInteger fibonacci2(int n) {
-		if (n == 0 || n == 1) {
-			return BigInteger.ONE;
-		}
-		return fibonacci2(n - 2).add(fibonacci2(n - 1));
-	}*/
 
 }
