@@ -30,9 +30,9 @@ public class JavaProgramsUtils {
 	 */
 	public static Map<Integer, BigInteger> generateFibonacciSeries(int number) {
 		Map<Integer, BigInteger> fibonacciMap = new TreeMap<>();
-		fibonacciMap.put(1, BigInteger.valueOf(1));
+		fibonacciMap.put(1, BigInteger.ONE);
 		if (number > 1) {
-			fibonacciMap.put(2, BigInteger.valueOf(1));
+			fibonacciMap.put(2, BigInteger.ONE);
 			for (int i = 2; i < number; i++) {
 				fibonacciMap.put(i + 1, fibonacciMap.get(i).add(fibonacciMap.get(i - 1)));
 			}
